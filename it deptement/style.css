@@ -1,0 +1,24 @@
+*{
+    
+    font-style: normal;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+}
+animated background{
+    .animated-bg {
+    height: 100vh;
+    background: linear-gradient(
+      -45deg,
+      #0d6efd,
+      #0a58ca,
+      #0dcaf0,
+      #084298
+    );
+    background-size: 400% 400%;
+    animation: gradientMove 12s ease infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(255, 255, 255);
+  }
+}

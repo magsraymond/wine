@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Vinum Estate - Premium Wines">
+<title>Vinum Estate | Fine Wines</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+:root {
+    --wine: #8b1e45;
+    --dark: #16050c;
+    --wine2: #3b0b1d;
+    --gold: #d9ad68;
+    --gold-light: #f3d49b;
+    --text: #fff7f2;
+    --muted: #cbbcc1;
+    --border: rgba(255,255,255,.13);
+}
+
+body {
+    font-family: Georgia, "Times New Roman", serif;
+    color: var(--text);
+    background: var(--dark);
+    overflow-x: hidden;
+}
+
+/* ================= BACKGROUND ================= */
+
+.background {
+    position: fixed;
+    inset: 0;
+    z-index: -10;
+    overflow: hidden;
+
+    background:
+        radial-gradient(circle at 20% 20%, #751638 0%, transparent 35%),
+        radial-gradient(circle at 80% 70%, #5b102d 0%, transparent 35%),
+        linear-gradient(135deg, #120309, #3b0b1d, #15040b);
+}
+
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: .45;
+    animation: float 15s infinite ease-in-out;
+}
+
+.orb1 {
+    width: 350px;
+    height: 350px;
+    background: #9d2752;
+    left: -100px;
+    top: 10%;
+}
+
+.orb2 {
+    width: 300px;
+    height: 300px;
+    background: #d19a52;
+    right: -100px;
+    top: 30%;
+    animation-delay: -5s;
+}
+
+.orb3 {
+    width: 400px;
+    height: 400px;
+    background: #5c1230;
+    bottom: -150px;
+    left: 35%;
+    animation-delay: -9s;
+}
+
+@keyframes float {
+    0%,100% {
+        transform: translate(0,0) scale(1);
+    }
+
+    50% {
+        transform: translate(80px,-60px) scale(1.15);
+    }
+}
+
+/* ================= HEADER ================= */
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 78px;
+
+    padding: 0 7%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    z-index: 100;
+
+    background: rgba(18,3,9,.72);
+    backdrop-filter: blur(18px);
+
+    border-bottom: 1px solid var(--border);
+}
+
+.logo {
+    color: var(--gold-light);
+    font-size: 21px;
+    font-weight: bold;
+    letter-spacing: 4px;
+}
+
+nav {
+    display: flex;
+    gap: 30px;
+}
+
+nav a {
+    color: var(--muted);
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    transition: .3s;
+}
+
+nav a:hover {
+    color: var(--gold-light);
+}
+
+.menu {
+    display: none;
+    border: 0;
+    background: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+    min-height: 100vh;
+    padding: 140px 8% 80px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 50px;
+}
+
+.tag {
+    color: var(--gold);
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 4px;
+}
+
+.hero h1 {
+    font-size: clamp(60px, 8vw, 105px);
+    font-weight: normal;
+    line-height: .9;
+    margin: 25px 0;
+}
+
+.hero h1 span,
+section h2 span {
+    color: var(--gold);
+    font-style: italic;
+}
+
+.hero p {
+    max-width: 520px;
+    color: var(--muted);
+    font-family: Arial, sans-serif;
+    line-height: 1.8;
+}
+
+.buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-block;
+    padding: 15px 26px;
+    border-radius: 40px;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.primary {
+    color: #29100b;
+    background: linear-gradient(135deg,var(--gold-light),var(--gold));
+}
+
+.primary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(217,173,104,.3);
+}
+
+.secondary {
+    color: white;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.05);
+}
+
+.secondary:hover {
+    background: rgba(255,255,255,.12);
+}
+
+.stats {
+    display: flex;
+    gap: 45px;
+    margin-top: 55px;
+}
+
+.stats strong {
+    display: block;
+    color: var(--gold-light);
+    font-size: 30px;
+}
+
+.stats span {
+    display: block;
+    color: var(--muted);
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    margin-top: 5px;
+}
+
+/* ================= WINE ================= */
+
+.wine-display {
+    height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.glow {
+    position: absolute;
+    width: 360px;
+    height: 360px;
+    border-radius: 50%;
+    background: rgba(160,30,70,.45);
+    filter: blur(80px);
+    animation: glow 4s infinite alternate;
+}
+
+@keyframes glow {
+    from { transform: scale(.8); }
+    to { transform: scale(1.2); }
+}
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(217,173,104,.28);
+}
+
+.circle1 {
+    width: 430px;
+    height: 430px;
+    animation: rotate 20s linear infinite;
+}
+
+.circle2 {
+    width: 530px;
+    height: 530px;
+    border-color: rgba(255,255,255,.07);
+    animation: rotate 30s linear infinite reverse;
+}
+
+@keyframes rotate {
+    to { transform: rotate(360deg); }
+}
+
+/* SVG WINE BOTTLE */
+
+.bottle {
+    width: 260px;
+    position: relative;
+    z-index: 5;
+    filter: drop-shadow(0 30px 30px rgba(0,0,0,.6));
+    animation: bottle 5s ease-in-out infinite;
+}
+
+@keyframes bottle {
+    0%,100% {
+        transform: translateY(0) rotate(-2deg);
+    }
+
+    50% {
+        transform: translateY(-25px) rotate(2deg);
+    }
+}
+
+/* ================= SECTIONS ================= */
+
+section:not(.hero) {
+    padding: 120px 8%;
+}
+
+.about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.about-card {
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(145deg,rgba(126,25,58,.7),rgba(35,8,17,.8));
+
+    border: 1px solid var(--border);
+
+    transform: rotate(-4deg);
+    transition: .5s;
+}
+
+.about-card:hover {
+    transform: rotate(0) scale(1.03);
+}
+
+.about-card .grapes {
+    font-size: 100px;
+}
+
+.about-card h3 {
+    font-size: 40px;
+    font-weight: normal;
+}
+
+.about-card p {
+    color: var(--gold);
+    font-style: italic;
+}
+
+h2 {
+    font-size: clamp(45px,5vw,70px);
+    line-height: 1;
+    font-weight: normal;
+    margin: 25px 0;
+}
+
+.about-text p,
+.contact-text p {
+    color: var(--muted);
+    font-family: Arial, sans-serif;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+/* ================= WINES ================= */
+
+.wines {
+    background: rgba(0,0,0,.18);
+}
+
+.heading {
+    text-align: center;
+    max-width: 700px;
+    margin: auto;
+}
+
+.heading > p:last-child {
+    color: var(--muted);
+    font-family: Arial, sans-serif;
+}
+
+.wine-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 25px;
+    margin-top: 60px;
+}
+
+.wine-card {
+    overflow: hidden;
+    background: rgba(255,255,255,.05);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(15px);
+    transition: .4s;
+}
+
+.wine-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(217,173,104,.5);
+}
+
+.card-image {
+    height: 270px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 120px;
+
+    background: radial-gradient(
+        circle,
+        rgba(130,25,60,.7),
+        transparent 70%
+    );
+}
+
+.card-image.rose {
+    background: radial-gradient(
+        circle,
+        rgba(190,60,100,.5),
+        transparent 70%
+    );
+}
+
+.card-image.white {
+    background: radial-gradient(
+        circle,
+        rgba(220,170,90,.45),
+        transparent 70%
+    );
+}
+
+.card-content {
+    padding: 30px;
+}
+
+.card-content small {
+    color: var(--gold);
+    letter-spacing: 3px;
+    font-family: Arial, sans-serif;
+}
+
+.card-content h3 {
+    font-size: 28px;
+    margin: 10px 0;
+}
+
+.card-content p {
+    color: var(--muted);
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+}
+
+.card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 25px;
+}
+
+.price {
+    color: var(--gold-light);
+    font-size: 24px;
+}
+
+/* ================= EXPERIENCE ================= */
+
+.experience {
+    min-height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    background:
+        linear-gradient(
+            rgba(50,5,20,.7),
+            rgba(15,3,8,.9)
+        );
+}
+
+.experience-content {
+    max-width: 750px;
+}
+
+.experience p {
+    color: var(--muted);
+    font-family: Arial, sans-serif;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+/* ================= CONTACT ================= */
+
+.contact {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 17px;
+
+    background: rgba(255,255,255,.05);
+
+    border: 1px solid var(--border);
+
+    outline: none;
+
+    color: white;
+
+    font-family: Arial, sans-serif;
+}
+
+input:focus,
+textarea:focus {
+    border-color: var(--gold);
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+    padding: 70px 8%;
+
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 50px;
+
+    border-top: 1px solid var(--border);
+
+    background: rgba(0,0,0,.3);
+}
+
+footer h4 {
+    color: var(--gold);
+    font-family: Arial, sans-serif;
+    margin-bottom: 15px;
+}
+
+footer a,
+footer p {
+    display: block;
+    color: var(--muted);
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    margin: 10px 0;
+}
+
+footer a:hover {
+    color: white;
+}
+
+.copyright {
+    padding: 20px;
+    text-align: center;
+    color: #8f8186;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    border-top: 1px solid var(--border);
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:900px) {
+
+    nav {
+        position: absolute;
+        top: 78px;
+        left: 0;
+        width: 100%;
+
+        display: none;
+        flex-direction: column;
+
+        padding: 30px;
+
+        text-align: center;
+
+        background: rgba(20,4,11,.96);
+    }
+
+    nav.active {
+        display: flex;
+    }
+
+    .menu {
+        display: block;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .hero p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .buttons {
+        justify-content: center;
+    }
+
+    .stats {
+        justify-content: center;
+    }
+
+    .about,
+    .contact {
+        grid-template-columns: 1fr;
+    }
+
+    .wine-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    footer {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media(max-width:550px) {
+
+    header {
+        padding: 0 5%;
+    }
+
+    .hero {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .hero h1 {
+        font-size: 60px;
+    }
+
+    .wine-display {
+        height: 480px;
+    }
+
+    .bottle {
+        width: 200px;
+    }
+
+    .circle1 {
+        width: 320px;
+        height: 320px;
+    }
+
+    .circle2 {
+        width: 390px;
+        height: 390px;
+    }
+
+    section:not(.hero) {
+        padding: 80px 5%;
+    }
+
+    footer {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ANIMATED BACKGROUND -->
+<div class="background">
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+</div>
+
+<!-- HEADER -->
+<header>
+
+    <div class="logo">🍷 VINUM</div>
+
+    <nav id="nav">
+        <a href="#home">Home</a>
+        <a href="#about">Our Story</a>
+        <a href="#wines">Wines</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <button class="menu" onclick="toggleMenu()">☰</button>
+
+</header>
+
+
+<!-- HERO -->
+<section class="hero" id="home">
+
+    <div>
+
+        <div class="tag">
+            EST. 1987 • PREMIUM WINERY
+        </div>
+
+        <h1>
+            Taste the
+            <span>Art</span>
+            of Wine.
+        </h1>
+
+        <p>
+            Discover carefully crafted wines born from
+            generations of tradition, passion and the finest
+            vineyards.
+        </p>
+
+        <div class="buttons">
+
+            <a href="#wines" class="btn primary">
+                Explore Our Wines
+            </a>
+
+            <a href="#about" class="btn secondary">
+                Our Story
+            </a>
+
+        </div>
+
+        <div class="stats">
+
+            <div>
+                <strong>37+</strong>
+                <span>Years of Craft</span>
+            </div>
+
+            <div>
+                <strong>24</strong>
+                <span>Wine Varieties</span>
+            </div>
+
+            <div>
+                <strong>18</strong>
+                <span>Awards</span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- WINE -->
+    <div class="wine-display">
+
+        <div class="glow"></div>
+
+        <div class="circle circle1"></div>
+        <div class="circle circle2"></div>
+
+        <svg class="bottle"
+             viewBox="0 0 300 650"
+             xmlns="http://www.w3.org/2000/svg">
+
+            <defs>
+
+                <linearGradient id="wine"
+                                x1="0"
+                                y1="0"
+                                x2="1"
+                                y2="1">
+
+                    <stop offset="0%" stop-color="#551022"/>
+                    <stop offset="50%" stop-color="#a5284e"/>
+                    <stop offset="100%" stop-color="#22040d"/>
+
+                </linearGradient>
+
+                <linearGradient id="foil">
+
+                    <stop offset="0%" stop-color="#795621"/>
+                    <stop offset="50%" stop-color="#e5c274"/>
+                    <stop offset="100%" stop-color="#76521c"/>
+
+                </linearGradient>
+
+            </defs>
+
+            <ellipse
+                cx="150"
+                cy="625"
+                rx="85"
+                ry="15"
+                fill="black"
+                opacity=".4"
+            />
+
+            <!-- neck -->
+            <rect
+                x="115"
+                y="45"
+                width="70"
+                height="140"
+                rx="15"
+                fill="url(#wine)"
+            />
+
+            <!-- foil -->
+            <rect
+                x="112"
+                y="30"
+                width="76"
+                height="55"
+                rx="8"
+                fill="url(#foil)"
+            />
+
+            <!-- body -->
+            <path
+                d="
+                M115 160
+                C115 190 80 205 65 245
+                L45 540
+                C43 585 80 610 150 615
+                C220 610 257 585 255 540
+                L235 245
+                C220 205 185 190 185 160
+                Z"
+                fill="url(#wine)"
+            />
+
+            <!-- bottle shine -->
+            <path
+                d="M90 245 C75 350 75 475 85 540"
+                stroke="#f59ab3"
+                stroke-width="8"
+                opacity=".18"
+                fill="none"
+            />
+
+            <!-- label -->
+            <rect
+                x="82"
+                y="330"
+                width="136"
+                height="155"
+                rx="3"
+                fill="#ead7aa"
+            />
+
+            <rect
+                x="91"
+                y="339"
+                width="118"
+                height="137"
+                fill="none"
+                stroke="#52202d"
+                stroke-width="2"
+            />
+
+            <text
+                x="150"
+                y="380"
+                text-anchor="middle"
+                font-family="Georgia"
+                font-size="18"
+                font-weight="bold"
+                fill="#3b111c">
+                VINUM
+            </text>
+
+            <text
+                x="150"
+                y="410"
+                text-anchor="middle"
+                font-family="Georgia"
+                font-size="10"
+                letter-spacing="3"
+                fill="#6b3845">
+                ESTATE
+            </text>
+
+            <text
+                x="150"
+                y="450"
+                text-anchor="middle"
+                font-family="Georgia"
+                font-size="28"
+                fill="#3b111c">
+                1987
+            </text>
+
+            <!-- cork -->
+            <rect
+                x="126"
+                y="18"
+                width="48"
+                height="25"
+                rx="5"
+                fill="#a87545"
+            />
+
+        </svg>
+
+    </div>
+
+</section>
+
+
+<!-- ABOUT -->
+<section class="about" id="about">
+
+    <div class="about-card">
+
+        <div class="grapes">🍇</div>
+
+        <h3>From Vine</h3>
+
+        <p>To Bottle</p>
+
+    </div>
+
+
+    <div class="about-text">
+
+        <div class="tag">
+            OUR STORY
+        </div>
+
+        <h2>
+            Where tradition
+            meets <span>passion.</span>
+        </h2>
+
+        <p>
+            At Vinum Estate, wine is more than a drink.
+            It is a story of the land, the seasons and
+            generations of people dedicated to perfecting
+            every bottle.
+        </p>
+
+        <p>
+            From carefully selected grapes to patient
+            maturation in oak barrels, every stage of our
+            process is guided by craftsmanship.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- WINES -->
+<section class="wines" id="wines">
+
+    <div class="heading">
+
+        <div class="tag">
+            OUR COLLECTION
+        </div>
+
+        <h2>
+            Wines made to
+            <span>remember.</span>
+        </h2>
+
+        <p>
+            Explore our signature collection.
+        </p>
+
+    </div>
+
+
+    <div class="wine-grid">
+
+        <article class="wine-card">
+
+            <div class="card-image">
+                🍷
+            </div>
+
+            <div class="card-content">
+
+                <small>RED WINE</small>
+
+                <h3>Vinum Reserve</h3>
+
+                <p>
+                    2021 • Cabernet Sauvignon
+                </p>
+
+                <div class="card-bottom">
+
+                    <span class="price">$48</span>
+
+                    <button
+                        class="btn primary"
+                        onclick="wineInfo('Vinum Reserve')">
+                        Discover
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <article class="wine-card">
+
+            <div class="card-image rose">
+                🌹
+            </div>
+
+            <div class="card-content">
+
+                <small>ROSÉ WINE</small>
+
+                <h3>Summer Rose</h3>
+
+                <p>
+                    2023 • Grenache
+                </p>
+
+                <div class="card-bottom">
+
+                    <span class="price">$35</span>
+
+                    <button
+                        class="btn primary"
+                        onclick="wineInfo('Summer Rose')">
+                        Discover
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <article class="wine-card">
+
+            <div class="card-image white">
+                🥂
+            </div>
+
+            <div class="card-content">
+
+                <small>WHITE WINE</small>
+
+                <h3>Golden Estate</h3>
+
+                <p>
+                    2022 • Chardonnay
+                </p>
+
+                <div class="card-bottom">
+
+                    <span class="price">$42</span>
+
+                    <button
+                        class="btn primary"
+                        onclick="wineInfo('Golden Estate')">
+                        Discover
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- EXPERIENCE -->
+<section class="experience" id="experience">
+
+    <div class="experience-content">
+
+        <div class="tag">
+            THE VINUM EXPERIENCE
+        </div>
+
+        <h2>
+            An unforgettable
+            journey through wine.
+        </h2>
+
+        <p>
+            Walk through our vineyards, discover our cellar
+            and experience wine tasting surrounded by the
+            beauty of the estate.
+        </p>
+
+        <button
+            class="btn primary"
+            onclick="bookExperience()">
+            Book an Experience
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+
+    <div class="contact-text">
+
+        <div class="tag">
+            GET IN TOUCH
+        </div>
+
+        <h2>
+            Let's raise
+            <span>a glass.</span>
+        </h2>
+
+        <p>
+            Have questions about our wines or want to visit
+            the estate? Send us a message.
+        </p>
+
+    </div>
+
+
+    <form id="contactForm">
+
+        <input
+            type="text"
+            id="name"
+            placeholder="Your name"
+            required
+        >
+
+        <input
+            type="email"
+            id="email"
+            placeholder="Your email"
+            required
+        >
+
+        <textarea
+            id="message"
+            rows="5"
+            placeholder="Your message"
+            required
+        ></textarea>
+
+        <button
+            type="submit"
+            class="btn primary">
+            Send Message
+        </button>
+
+    </form>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+
+    <div>
+
+        <div class="logo">
+            🍷 VINUM
+        </div>
+
+        <p>
+            Crafted with passion.
+            Shared with joy.
+        </p>
+
+    </div>
+
+
+    <div>
+
+        <h4>Explore</h4>
+
+        <a href="#home">Home</a>
+        <a href="#about">Our Story</a>
+        <a href="#wines">Wines</a>
+        <a href="#experience">Experience</a>
+
+    </div>
+
+
+    <div>
+
+        <h4>Contact</h4>
+
+        <p>hello@vinumestate.com</p>
+        <p>+256 700 000 000</p>
+        <p>Vinum Estate</p>
+
+    </div>
+
+</footer>
+
+
+<div class="copyright">
+    © 2026 Vinum Estate. All rights reserved.
+</div>
+
+
+<script>
+
+/* MOBILE MENU */
+
+function toggleMenu() {
+
+    document
+        .getElementById("nav")
+        .classList.toggle("active");
+
+}
+
+
+/* CLOSE MENU AFTER CLICK */
+
+document
+    .querySelectorAll("nav a")
+    .forEach(link => {
+
+        link.addEventListener("click", () => {
+
+            document
+                .getElementById("nav")
+                .classList.remove("active");
+
+        });
+
+    });
+
+
+/* WINE BUTTON */
+
+function wineInfo(wine) {
+
+    alert(
+        wine +
+        "\\n\\nThis premium wine is part of the Vinum Estate collection."
+    );
+
+}
+
+
+/* EXPERIENCE BUTTON */
+
+function bookExperience() {
+
+    alert(
+        "🍷 VINUM ESTATE\\n\\n" +
+        "Thank you for your interest!\\n" +
+        "Our team will contact you to arrange your wine experience."
+    );
+
+}
+
+
+/* CONTACT FORM */
+
+document
+    .getElementById("contactForm")
+    .addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        const name =
+            document.getElementById("name").value;
+
+        alert(
+            "Thank you, " +
+            name +
+            "!\\n\\nYour message has been received."
+        );
+
+        this.reset();
+
+    });
+
+
+/* MOUSE PARALLAX */
+
+document.addEventListener("mousemove", function(e) {
+
+    const x =
+        (e.clientX / window.innerWidth - .5) * 25;
+
+    const y =
+        (e.clientY / window.innerHeight - .5) * 25;
+
+    document.querySelector(".orb1").style.transform =
+        `translate(${x}px, ${y}px)`;
+
+    document.querySelector(".orb2").style.transform =
+        `translate(${-x}px, ${y}px)`;
+
+    document.querySelector(".orb3").style.transform =
+        `translate(${x}px, ${-y}px)`;
+
+});
+
+</script>
+
+</body>
+</html>
